@@ -28,5 +28,10 @@ ElGamal Pub-Key Encryption Written in C++ by Aaroha Sapkota and Jonathan Mazurki
 ## Example:
 ![image](https://github.com/user-attachments/assets/e4a21787-9f3f-457a-9934-0c8dd23ade09)
 
+### Libraries Used
+Modular Arithmetic: https://github.com/hurchalla/modular_arithmetic 
+
+CryptoPP: https://github.com/weidai11/cryptopp
+
 
 
