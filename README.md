@@ -1,5 +1,5 @@
 # El-Gamal
-Repo for ElGamal Pub-Key Encryption Written in C++ by Aaroha Sapkota and Jonathan Mazurkiewicz for CIS 4634 003 Appl Cryptography and Security Spring 2025 cohort taught by Mehrdad Nojoumian
+ElGamal Pub-Key Encryption Written in C++ by Aaroha Sapkota and Jonathan Mazurkiewicz for CIS 4634 003 Appl Cryptography and Security Spring 2025 cohort taught by Mehrdad Nojoumian
 
 
 ## Key Generation
