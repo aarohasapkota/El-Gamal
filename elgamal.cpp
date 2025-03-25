@@ -1,4 +1,55 @@
 #include "elgamal.h"
+using namespace std;
+#include <math.h>
+
+
+
+//Function for converting text to ascii
+InfInt convertToASCII(string text)
+{
+    string result = "";
+    for (int i = 0; i < text.length(); i++)
+    {
+        char x = text[i];
+        result += to_string(int(x));
+    }
+    InfInt number = result;
+    return number;
+}
+
+//Function to generate random number in a bound.
+InfInt random_generator(InfInt a, InfInt b) {
+    srand(time(NULL)); // Seed the random generator
+
+    InfInt range = b - a + 1;
+    InfInt random_offset = InfInt(rand()) % range; // Get a number in range [0, range-1]
+    
+    return a + random_offset; // Shift into range [a, b]
+}
+//Function for converting ascii to text
+string asciiToText(InfInt number)
+{
+    int num = 0;
+    string text = "";
+    string n = number.toString();
+    for (int i = 0; i < n.length(); i++) {
+ 
+        // Append the current digit
+        num = num * 10 + (n[i] - '0');
+ 
+        // If num is within the required range
+        if (num >= 32 && num <= 122) {
+ 
+            // Convert num to char
+            char ch = (char)num;
+            text += ch;
+ 
+            // Reset num to 0
+            num = 0;
+        }
+    }
+    return text;
+}
 
 // Modular exponentiation using repeated squaring
 InfInt mod_exp(InfInt base, InfInt exp, InfInt mod) {
@@ -94,37 +145,43 @@ vector<InfInt> get_prime_factors(InfInt n) {
     // Check odd numbers only (reduces iterations by half)
     for (InfInt i = 3; i * i <= n; i += 2) {
         while (n % i == 0) {
-            if (factors.empty() || factors.back() != i)
+            if (factors.empty() || factors.back() != i){
                 factors.push_back(i);
+            }
+            cout << i << " is a prime factor found" << endl;
+
             n /= i;
         }
     }
 
     // If n is still greater than 1, it's prime
-    if (n > 1) factors.push_back(n);
+    
+    if (n > 1) {
+        cout << n << " is a prime factorfound" <<endl;
+        factors.push_back(n);
+    }
 
     return factors;
 }
 
-
+// Function to find a generator for Z_p*
 // Function to find a generator for Z_p*
 InfInt find_generator(InfInt p) {
     InfInt phi = p - 1;
     vector<InfInt> factors = get_prime_factors(phi);
-    
+
     cout << "Finding generator for p=" << p << ", phi=" << phi << endl;
+    for (InfInt factor : factors) {
+        cout << factor << " ";
+    }
+    cout << endl;
 
-    // Start with a small base, typically 2
-    InfInt g = 2;
-
-    // Check if g is a generator
-    while (g < p) {
+    for (InfInt g = 2; g < p; g++) {
         bool is_generator = true;
 
-        // Check the condition for each prime factor of (p-1)
+        // Check for each prime factor of (p-1)
         for (InfInt factor : factors) {
             InfInt exp = phi / factor;
-            // If g^(exp) mod p == 1, then g is not a generator
             if (mod_exp(g, exp, p) == 1) {
                 is_generator = false;
                 break;
@@ -135,9 +192,6 @@ InfInt find_generator(InfInt p) {
             cout << "Generator found: " << g << endl;
             return g;
         }
-
-        // Increment g and check the next candidate
-        g++;
     }
 
     cerr << "Error: No generator found for p=" << p << endl;
@@ -145,15 +199,40 @@ InfInt find_generator(InfInt p) {
 }
 
 
-// Function to generate the ElGamal key pair
-void key_gen() {
-    int bit_length;
-    cout << "Enter key size (in bits, e.g., 32, 64, 128, 256): ";
-    cin >> bit_length;
 
-    cout << "Generating a " << bit_length << "-bit prime...\n";
-    InfInt p = generate_prime(bit_length);
-    cout << "Prime p generated: " << p << endl;
+
+
+// Function to generate the ElGamal key pair
+// void key_gen() {
+//     int bit_length;
+//     cout << "Enter key size (in bits, e.g., 32, 64, 128, 256): ";
+//     cin >> bit_length;
+//     cout << "Generating a " << bit_length << "-bit prime...\n";
+//     InfInt p = generate_prime(bit_length);
+//     cout << "Prime p generated: " << p << endl;
+
+//     cout << "Finding a generator for Z_" << p << "*...\n";
+//     InfInt g = find_generator(p);
+//     cout << "Generator g found: " << g << endl;
+
+//     cout << "Selecting a private key...\n";
+//     InfInt x = generate_in_range(1, p - 2);
+//     cout << "Private key x selected: " << x << endl;
+
+//     cout << "Computing Alpha_Mod_A...\n";
+//     InfInt h = mod_exp(g, x, p);
+//     cout << "Alpha_Mode_A key computed: " << h << endl;
+
+//     cout << "ElGamal Key Generation Complete!" << endl;
+//     cout << "Public Key: (p=" << p << ", g=" << g << ", h=" << h << ")" << endl;
+//     cout << "Private Key: x=" << x << endl;
+// }
+
+void encryption_decryption(int bitsize, string message){
+    InfInt messageNUM = convertToASCII(message);
+
+    cout << "Generating a " << bitsize << "-bit prime...\n";
+    InfInt p = generate_prime(bitsize);
 
     cout << "Finding a generator for Z_" << p << "*...\n";
     InfInt g = find_generator(p);
@@ -163,11 +242,36 @@ void key_gen() {
     InfInt x = generate_in_range(1, p - 2);
     cout << "Private key x selected: " << x << endl;
 
-    cout << "Computing public key...\n";
+    cout << "Computing Alpha_Mod_A...\n";
     InfInt h = mod_exp(g, x, p);
-    cout << "Public key computed: " << h << endl;
+    cout << "Alpha_Mode_A key computed: " << h << endl;
 
     cout << "ElGamal Key Generation Complete!" << endl;
     cout << "Public Key: (p=" << p << ", g=" << g << ", h=" << h << ")" << endl;
     cout << "Private Key: x=" << x << endl;
+
+    cout << "Computing k random between 1 and p-2" << endl;
+    InfInt k = random_generator(1,p-2);
+    cout << "K generated: " << k << endl;
+
+    cout << "Computing gamma.." << endl;
+    InfInt gamma = mod_exp(g,k,p);
+    cout << "Gamma generated: " << gamma << endl;
+
+    cout << "Computing Delta.." << endl;
+    InfInt delta = (messageNUM * mod_exp(h,k,p) % p);
+    cout << "Delta Generated: " << delta << endl;
+
+    cout << "Ciper Text Generated!!" << endl;
+    cout << endl << "Ciphertext is Gamma: " << gamma << " + Delta: " << delta << endl;
+
+    cout << "Calling Decryption Now...." << endl;
+
+    InfInt dec_message = (delta * mod_exp(gamma, p - 1 - x, p) % p );
+    string dec_text = asciiToText(dec_message);
+    cout << "Decrypted message is: " << dec_text << endl;
+
+
+
 }
+
