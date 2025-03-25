@@ -1,19 +1,21 @@
 #include <iostream>
-#include "include/key_generator.h"
-
+#include <chrono>
+#include "elgamal.h"
 
 using namespace std;
+using namespace std::chrono;
 
 int main() {
-    int bit_length;
-    cout << "Enter key size (in bits, e.g., 16, 32, 64, 128): ";
-    cin >> bit_length;
+    cout << "Testing ElGamal Key Generation...\n";
 
-    long long prime_candidate = generate_prime(bit_length);
-    cout << "Generated Prime: " << prime_candidate << endl;
+    auto start = high_resolution_clock::now();
 
-    long long generator = find_generator(prime_candidate);
-    cout << "Generator for Z_" << prime_candidate << "*: " << generator << endl;
+    key_gen();  // Calls the function which now manages local variables
+
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(stop - start);
+
+    cout << "\nKey generation completed in " << duration.count() << " milliseconds.\n";
 
     return 0;
 }
