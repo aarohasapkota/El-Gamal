@@ -14,7 +14,7 @@ Follow these steps to set up and run the application in the current directory:
 
 2. Compile the source files:
     ```bash
-    g++ main.cpp src/key_generator.cpp -Iinclude -o main
+    g++ main.cpp elgamal.cpp -Iinclude -o main
     ```
 
 3. Run the application:
