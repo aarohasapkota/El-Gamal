@@ -94,26 +94,41 @@ vector<long long> get_prime_factors(long long n) {
     return factors;
 }
 
-// Function to find a generator for Z_p*
+// Optimized function to find a generator for Z_p*
 long long find_generator(long long p) {
-    long long phi = p - 1;  // Euler's totient function (p-1 for prime p)
+    long long phi = p - 1;
     vector<long long> factors = get_prime_factors(phi);
 
-    for (long long g = 2; g < p; g++) {
-        bool is_generator = true;
+    int max_attempts = max(10, (int)log2(p));  // 👈 Dynamic attempts
 
-        // Check if g^((p-1)/factor) mod p != 1 for all factors
+    for (int attempt = 0; attempt < max_attempts; attempt++) {
+        long long g = generate_in_range(2, p - 1); // Pick a random candidate
+
+        bool is_generator = true;
         for (long long factor : factors) {
             if (mod_exp(g, phi / factor, p) == 1) {
                 is_generator = false;
                 break;
             }
         }
-
         if (is_generator)
-            return g; // Found a valid generator
+            return g;  // Found a valid generator
     }
-    return -1; // Should never happen for a valid prime p
+
+    return -1; // Should never happen unless p is incorrect
+}
+
+// Function to generate the ElGamal key pair
+void key_gen(long long &p, long long &g, long long &h, long long &x) {
+    int bit_length = 64;   // Define key size (can be changed as needed)
+    p = generate_prime(bit_length);  // Generate a 64-bit prime
+    g = find_generator(p);           // Find a generator for Z_p*
+    x = generate_in_range(1, p - 2); // Use existing function to generate private key x
+    h = mod_exp(g, x, p);            // Compute public key h = g^x mod p
+
+    cout << "ElGamal Key Generation Complete!" << endl;
+    cout << "Public Key: (p=" << p << ", g=" << g << ", h=" << h << ")" << endl;
+    cout << "Private Key: x=" << x << endl;
 }
 
 
