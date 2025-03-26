@@ -46,19 +46,19 @@
 ## Example:
 
 
-### Libraries Used
+## Libraries Used
 We use `#include <iostream>`, `#include <vector>`, and `#include "infint-master/InfInt.h"` in our C++ program.
 
 
-# Run Commands for New User
+## Implementation Instructions
 
 Follow these steps to set up and run the application in the current directory.
 
-# Prerequisites
+### Prerequisites
 1. Ensure you have a C++ compiler installed (e.g., `g++`).
 2. Verify that all required libraries and dependencies are installed.
 
-# Running the Application
+### Running the Application
 1. Navigate to the current directory:
 
 2. Compile the source files:
