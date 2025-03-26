@@ -1,6 +1,6 @@
 /* 
    Team Members: Aaroha Sapkota and Jonathan Mazurkiewicz
-   Assignment: Project 2 - El Gamal Encryption
+   Assignment: Project 3 - El Gamal Encryption
    Professor: Dr. Nojoumian
    Due Date: 3/25/2025
 */
