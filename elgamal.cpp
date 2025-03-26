@@ -155,15 +155,14 @@ void encryption_decryption(int bitsize, string message){
 
     cout << "Finding a generator for Z_" << p << "*...\n";
     InfInt g = find_generator_safe_prime(p);
-    cout << "Generator g found: " << g << endl;
 
     cout << "Selecting a private key...\n";
     InfInt x = generate_in_range(1, p - 2);
-    cout << "Private key x selected: " << x << endl;
+    cout << "Private key selected: " << x << endl;
 
-    cout << "Computing Alpha_Mod_A...\n";
+    cout << "Computing alpha (mod a)...\n";
     InfInt h = mod_exp(g, x, p);
-    cout << "Alpha_Mode_A key computed: " << h << endl;
+    cout << "alpha (mod a) " << h << endl;
 
     cout << "ElGamal Key Generation Complete!" << endl;
     cout << "Public Key: (p=" << p << ", g=" << g << ", h=" << h << ")" << endl;
@@ -171,7 +170,7 @@ void encryption_decryption(int bitsize, string message){
 
     cout << "Computing k random between 1 and p-2" << endl;
     InfInt k = generate_in_range(1,p-2);
-    cout << "K generated: " << k << endl;
+    cout << "k generated: " << k << endl;
 
     cout << "Computing gamma.." << endl;
     InfInt gamma = mod_exp(g,k,p);
