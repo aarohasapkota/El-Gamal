@@ -148,7 +148,7 @@ vector<InfInt> get_prime_factors(InfInt n) {
             if (factors.empty() || factors.back() != i){
                 factors.push_back(i);
             }
-            cout << i << " is a prime factor found" << endl;
+            //cout << i << " is a prime factor found" << endl;
 
             n /= i;
         }
@@ -157,7 +157,7 @@ vector<InfInt> get_prime_factors(InfInt n) {
     // If n is still greater than 1, it's prime
     
     if (n > 1) {
-        cout << n << " is a prime factorfound" <<endl;
+        //cout << n << " is a prime factorfound" <<endl;
         factors.push_back(n);
     }
 
