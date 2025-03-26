@@ -44,8 +44,10 @@
 
 
 ## Example:
-<img width="646" alt="Screenshot 2025-03-25 at 8 04 27 PM" src="https://github.com/user-attachments/assets/f92a18d4-af15-40da-9005-1f069eb7599f" />
-<img width="646" alt="Screenshot 2025-03-25 at 8 03 11 PM" src="https://github.com/user-attachments/assets/71058f98-c4d0-4bfd-9f2f-aa15eacf07ba" />
+
+<img width="646" alt="Screenshot 2025-03-25 at 8 03 11 PM" src="https://github.com/user-attachments/assets/6adcd0be-434b-469e-afe8-829dbd7c1c75" />
+<img width="646" alt="Screenshot 2025-03-25 at 8 04 27 PM" src="https://github.com/user-attachments/assets/1e44c3f4-a5f3-46e0-8d11-a29668abd858" />
+
 
 
 
