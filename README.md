@@ -63,7 +63,7 @@ Follow these steps to set up and run the application in the current directory.
 
 2. Compile the source files:
     ```bash
-    g++ main.cpp elgamal.cpp -Iinclude -o main
+    g++ main.cpp elgamal.cpp -o main
     ```
     Note: Compilation wil result in warnings due to redefinition of predefined types. They do not affect results.
 
