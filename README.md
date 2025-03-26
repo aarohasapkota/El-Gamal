@@ -44,6 +44,9 @@
 
 
 ## Example:
+<img width="646" alt="Screenshot 2025-03-25 at 8 04 27 PM" src="https://github.com/user-attachments/assets/f92a18d4-af15-40da-9005-1f069eb7599f" />
+<img width="646" alt="Screenshot 2025-03-25 at 8 03 11 PM" src="https://github.com/user-attachments/assets/71058f98-c4d0-4bfd-9f2f-aa15eacf07ba" />
+
 
 
 ## Libraries Used
@@ -63,7 +66,7 @@ Follow these steps to set up and run the application in the current directory.
 
 2. Compile the source files:
     ```bash
-    g++ main.cpp elgamal.cpp -Iinclude -o main
+    g++ main.cpp elgamal.cpp -o main
     ```
     Note: Compilation wil result in warnings due to redefinition of predefined types. They do not affect results.
 
