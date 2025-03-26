@@ -1,30 +1,43 @@
 #ifndef ELGAMAL_H
 #define ELGAMAL_H
 
-#include <string>
+#include <iostream>
 #include <vector>
-#include "infint-master/InfInt.h" // Assuming InfInt is a custom class or library you're using
+#include <string>
+#include "infint-master/InfInt.h"
 
 using namespace std;
 
-// Function declarations
+// Function prototypes
 
+// Converts a text string to an ASCII-encoded InfInt
 InfInt convertToASCII(string text);
-//Function for converting ascii to text
+
+// Converts an ASCII-encoded InfInt back to text
 string asciiToText(InfInt number);
 
+// Modular exponentiation: (base^exp) % mod
 InfInt mod_exp(InfInt base, InfInt exp, InfInt mod);
 
-InfInt random_generator(InfInt a,InfInt b);
+// Generates a random InfInt within a specified range [a, b]
+InfInt generate_in_range(InfInt min, InfInt max);
 
-
-InfInt generate_in_range( InfInt min,  InfInt max);
+// Generates a prime number of a given bit length
 InfInt generate_prime(int bit_length);
-bool Rabin_Miller( InfInt n, int iterations = 10);
 
-std::vector<InfInt> get_prime_factors( InfInt n);
-InfInt find_generator( InfInt p);
+// Miller-Rabin primality test
+bool Rabin_Miller(InfInt n, int iterations = 5);
 
-void encryption_decryption(int bitsize,  string message);
+// Computes power of two without bit shifting
+InfInt power_of_two(int exponent);
+
+// Generates a safe prime (p = 2q + 1) of a given bit length
+InfInt generate_safe_prime(int bit_length);
+
+// Optimized function to find a generator for a safe prime p
+InfInt find_generator_safe_prime(InfInt p);
+
+// Encrypts and decrypts a message using ElGamal encryption
+void encryption_decryption(int bitsize, string message);
 
 #endif // ELGAMAL_H
